@@ -25,22 +25,27 @@ Segmentation/
 
 The pipelines support two methods of input. The required directories/files should be created and placed in the pipeline directory before running:
 
-1. **Directory of Text Files**
+1. **Directory of Text Files (SLR38 target_directory/)**
    - Create and place the `SLR38 target_directory/` in the pipeline directory
-   - Each file should contain one utterance
-   - Files should be named with unique identifiers (e.g., `20170001P00444A0063.txt`)
+   - Each file should be named as the utterance ID (e.g., `20170001P00444A0063.txt`)
+   - Each file should contain a single line: the Chinese transcription for that utterance
    - All files must be in UTF-8 encoding
+   - Example:
+     - `SLR38 target_directory/20170001P00444A0063.txt`:
+       ```
+       高德地图
+       ```
 
-2. **Single Transcription File**
+2. **Single Transcription File (TRANS.txt)**
    - Create and place `TRANS.txt` in the pipeline directory
-   - Each line should contain one utterance
+   - The file must be tab-delimited with the following header and columns:
+     ```
+     UtteranceID<TAB>SpeakerID<TAB>Transcription
+     37_5622_20170913203118.wav	37_5622	高德地图
+     37_5622_20170913203322.wav	37_5622	我想用百度搜索短信
+     ...
+     ```
    - File must be in UTF-8 encoding
-   - Example format:
-     ```
-     utterance1
-     utterance2
-     utterance3
-     ```
 
 ## Pipeline Details
 
