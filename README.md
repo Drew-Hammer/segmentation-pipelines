@@ -1,6 +1,6 @@
 # Chinese Text Segmentation and Indexing Pipelines
 
-This repository contains a set of pipelines for processing Chinese text, including word segmentation, syllable indexing, and word indexing. The pipelines are designed to work with the Stanford Chinese Segmenter and provide structured output in CSV format.
+This repository contains a set of pipelines for processing Chinese text, including word segmentation, syllable indexing, and word indexing. The pipelines are designed to work with the Stanford Chinese Segmenter and provide structured output in CSV or JSON format.
 
 ## Project Structure
 
