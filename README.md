@@ -18,16 +18,16 @@ Pipelines/
 
 ## Input Methods
 
-The pipelines support two methods of input:
+The pipelines support two methods of input. The required directories/files should be created and placed in the pipeline directory before running:
 
 1. **Directory of Text Files**
-   - Place individual text files in the `SLR38 target_directory/`
+   - Create and place the `SLR38 target_directory/` in the pipeline directory
    - Each file should contain one utterance
    - Files should be named with unique identifiers (e.g., `20170001P00444A0063.txt`)
    - All files must be in UTF-8 encoding
 
 2. **Single Transcription File**
-   - Create a file named `TRANS.txt` in the pipeline directory
+   - Create and place `TRANS.txt` in the pipeline directory
    - Each line should contain one utterance
    - File must be in UTF-8 encoding
    - Example format:
@@ -51,8 +51,8 @@ The pipelines support two methods of input:
 
 2. **Input Requirements**:
    - Choose one of the two input methods:
-     - Place text files in `SLR38 target_directory/`
-     - OR create `TRANS.txt` in the current directory
+     - Place `SLR38 target_directory/` in the current directory
+     - OR place `TRANS.txt` in the current directory
    - Files should be in UTF-8 encoding
    - Each file/line should contain one utterance
 
@@ -97,8 +97,8 @@ The pipelines support two methods of input:
 
 2. **Input Requirements**:
    - Choose one of the two input methods:
-     - Place text files in `SLR38 target_directory/`
-     - OR create `TRANS.txt` in the current directory
+     - Place `SLR38 target_directory/` in the current directory
+     - OR place `TRANS.txt` in the current directory
    - Files should be in UTF-8 encoding
    - Each file/line should contain one utterance
 
@@ -157,13 +157,12 @@ Syllable_Indexing/
 Each CSV file contains:
 - Utterance ID
 - Word/Syllable index
-- Additional metadata
 
 Example:
 ```csv
-utterance_id,index,metadata
-20170001P00444A0063,1,additional_info
-20170001P00444A0064,2,additional_info
+utterance_id,index
+20170001P00444A0063,1
+20170001P00444A0064,2
 ```
 
 ## Common Components
@@ -212,6 +211,7 @@ utterance_id,index,metadata
    - Check input file encoding
    - Compile all C++ files
    - Choose the appropriate input method based on your data format
+   - Ensure input directories/files are in place
 
 2. **During Processing**:
    - Monitor disk space
