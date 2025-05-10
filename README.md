@@ -5,15 +5,20 @@ This directory contains two main pipelines for processing Chinese text: Word Ind
 ## Directory Structure
 
 ```
-Pipelines/
-├── Word Indexing/
-│   ├── preprocessing.sh
-│   ├── process_transcriptions.sh
-│   └── [other pipeline files]
-└── Syllable Indexing/
-    ├── preprocessing.sh
-    ├── process_transcriptions.sh
-    └── [other pipeline files]
+Segmentation/
+├── stanford-segmenter-4.2.0/
+│   ├── stanford-segmenter-4.2.0.jar
+│   ├── segment.sh
+│   └── [other segmenter files]
+└── Pipelines/
+    ├── Word Indexing/
+    │   ├── preprocessing.sh
+    │   ├── process_transcriptions.sh
+    │   └── [other pipeline files]
+    └── Syllable Indexing/
+        ├── preprocessing.sh
+        ├── process_transcriptions.sh
+        └── [other pipeline files]
 ```
 
 ## Input Methods
