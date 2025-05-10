@@ -1,6 +1,6 @@
 # Chinese Text Segmentation Pipelines
 
-This directory contains two main pipelines for processing Chinese text: Word Indexing and Syllable Indexing. Each pipeline consists of two sub-pipelines: preprocessing and transcription processing.
+This directory contains two main pipelines for processing Chinese audio transcripts in preparation for model training: Word Indexing and Syllable Indexing. Each pipeline consists of two sub-pipelines: `preprocessing.sh` and `process_transcriptions.sh`.
 
 ## Directory Structure
 
