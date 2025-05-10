@@ -1,0 +1,2 @@
+- consider using h5py rather than JSON for result storage
+- or CSV if not h5py
