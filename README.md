@@ -1,81 +1,174 @@
-# Chinese Text Segmentation and Indexing Pipelines
+# Chinese Text Segmentation Pipelines
 
-This repository contains a set of pipelines for processing Chinese text, including word segmentation, syllable indexing, and word indexing. The pipelines are designed to work with the Stanford Chinese Segmenter and provide structured output in CSV or JSON format.
+This directory contains two main pipelines for processing Chinese text: Word Indexing and Syllable Indexing. Each pipeline consists of two sub-pipelines: preprocessing and transcription processing.
 
-## Project Structure
+## Directory Structure
 
 ```
-.
-├── Word Parsing/
-│   ├── Segmentation/
-│   │   ├── Pipelines/
-│   │   │   ├── Word Indexing/
-│   │   │   └── Syllable Indexing/
-│   │   └── stanford-segmenter-4.2.0/
-│   └── DATASETS/
+Pipelines/
+├── Word Indexing/
+│   ├── preprocessing.sh
+│   ├── process_transcriptions.sh
+│   └── [other pipeline files]
+└── Syllable Indexing/
+    ├── preprocessing.sh
+    ├── process_transcriptions.sh
+    └── [other pipeline files]
 ```
 
-## Prerequisites
+## Input Methods
 
-- C++ compiler (g++ or clang++)
-- Python 3.x
-- Stanford Chinese Segmenter 4.2.0
-- Make sure you have the required dependencies installed:
-  - nlohmann/json (included in the repository)
-  - Standard C++ libraries
+The pipelines support two methods of input:
 
-## Pipeline Components
+1. **Directory of Text Files**
+   - Place individual text files in the `SLR38 target_directory/`
+   - Each file should contain one utterance
+   - Files should be named with unique identifiers (e.g., `20170001P00444A0063.txt`)
+   - All files must be in UTF-8 encoding
+
+2. **Single Transcription File**
+   - Create a file named `TRANS.txt` in the pipeline directory
+   - Each line should contain one utterance
+   - File must be in UTF-8 encoding
+   - Example format:
+     ```
+     utterance1
+     utterance2
+     utterance3
+     ```
+
+## Pipeline Details
 
 ### 1. Word Indexing Pipeline
 
-The Word Indexing pipeline processes Chinese text to create word-level indices and corresponding CSV files.
+#### A. Preprocessing Pipeline (`preprocessing.sh`)
 
-#### Usage:
-
-1. Place your input text files in the appropriate directory
-2. Run the preprocessing script:
+1. **Setup**:
    ```bash
    cd Word\ Indexing/
+   chmod +x preprocessing.sh
+   ```
+
+2. **Input Requirements**:
+   - Choose one of the two input methods:
+     - Place text files in `SLR38 target_directory/`
+     - OR create `TRANS.txt` in the current directory
+   - Files should be in UTF-8 encoding
+   - Each file/line should contain one utterance
+
+3. **Execution**:
+   ```bash
    ./preprocessing.sh
    ```
-3. Process the transcriptions:
+
+4. **What it does**:
+   - Extracts text from input files using `textIsolatorForPreprocessing.cpp`
+   - Prepends utterance IDs using `prependUtteranceID.cpp`
+   - Combines transcriptions using `combineTranscriptions.cpp`
+   - Performs post-segmentation processing using `preprocess_post_segmentation.cpp`
+
+#### B. Transcription Processing Pipeline (`process_transcriptions.sh`)
+
+1. **Setup**:
+   ```bash
+   chmod +x process_transcriptions.sh
+   ```
+
+2. **Execution**:
    ```bash
    ./process_transcriptions.sh
    ```
 
-#### Output:
-- Creates a directory structure organized by words
-- Generates CSV files containing utterance IDs and word indices
-- Maintains original Chinese characters in directory names
+3. **What it does**:
+   - Creates utterance arrays using `utteranceArrays.cpp`
+   - Generates word-level indices
+   - Creates CSV files for each word
+   - Maintains original Chinese characters in directory names
 
 ### 2. Syllable Indexing Pipeline
 
-The Syllable Indexing pipeline processes Chinese text to create syllable-level indices and corresponding CSV files.
+#### A. Preprocessing Pipeline (`preprocessing.sh`)
 
-#### Usage:
-
-1. Place your input text files in the appropriate directory
-2. Run the preprocessing script:
+1. **Setup**:
    ```bash
    cd Syllable\ Indexing/
+   chmod +x preprocessing.sh
+   ```
+
+2. **Input Requirements**:
+   - Choose one of the two input methods:
+     - Place text files in `SLR38 target_directory/`
+     - OR create `TRANS.txt` in the current directory
+   - Files should be in UTF-8 encoding
+   - Each file/line should contain one utterance
+
+3. **Execution**:
+   ```bash
    ./preprocessing.sh
    ```
-3. Process the transcriptions:
+
+4. **What it does**:
+   - Extracts text from input files using `textIsolatorForPreprocessing.cpp`
+   - Prepends utterance IDs using `prependUtteranceID.cpp`
+   - Combines transcriptions using `combineTranscriptions.cpp`
+   - Performs post-segmentation processing using `preprocess_post_segmentation.cpp`
+
+#### B. Transcription Processing Pipeline (`process_transcriptions.sh`)
+
+1. **Setup**:
+   ```bash
+   chmod +x process_transcriptions.sh
+   ```
+
+2. **Execution**:
    ```bash
    ./process_transcriptions.sh
    ```
 
-#### Output:
-- Creates a directory structure organized by syllables
-- Generates CSV files containing utterance IDs and syllable indices
-- Maintains original Chinese characters in directory names
+3. **What it does**:
+   - Creates syllable-level indices
+   - Generates CSV files for each syllable
+   - Maintains original Chinese characters in directory names
 
-## File Descriptions
+## Output Structure
 
-### Common Components
+### Word Indexing Output
+```
+Word_Indexing/
+├── word_1/
+│   └── indices.csv
+├── word_2/
+│   └── indices.csv
+└── ...
+```
 
-- `preprocessing.sh`: Initial preprocessing script for text files
-- `process_transcriptions.sh`: Main processing script for transcriptions
+### Syllable Indexing Output
+```
+Syllable_Indexing/
+├── syllable_1/
+│   └── indices.csv
+├── syllable_2/
+│   └── indices.csv
+└── ...
+```
+
+## CSV File Format
+
+Each CSV file contains:
+- Utterance ID
+- Word/Syllable index
+- Additional metadata
+
+Example:
+```csv
+utterance_id,index,metadata
+20170001P00444A0063,1,additional_info
+20170001P00444A0064,2,additional_info
+```
+
+## Common Components
+
+### Core Files
 - `textIsolator.cpp`: Extracts text from input files
 - `textIsolatorForPreprocessing.cpp`: Preprocessing text isolator
 - `prependUtteranceID.cpp`: Adds utterance IDs to text
@@ -83,35 +176,60 @@ The Syllable Indexing pipeline processes Chinese text to create syllable-level i
 - `preprocess_post_segmentation.cpp`: Post-segmentation processing
 
 ### Word Indexing Specific
-
 - `utteranceArrays.cpp`: Creates arrays of utterances
 - `innovation.py`: Python script for additional processing
 - `utterance_arrays.json`: JSON file containing utterance arrays
 
-## Output Format
+## Troubleshooting Guide
 
-The pipelines generate CSV files with the following structure:
-- Each word/syllable has its own directory
-- CSV files contain:
-  - Utterance ID
-  - Index information
-  - Additional metadata
+### Common Issues and Solutions
 
-## Notes
+1. **Permission Denied**
+   ```bash
+   chmod +x *.sh
+   ```
 
-- Make sure to compile the C++ files before running the scripts
-- The Stanford Segmenter must be properly configured
-- Input files should be in UTF-8 encoding
-- Original Chinese characters are preserved in directory names
+2. **Compilation Errors**
+   ```bash
+   g++ -std=c++11 your_file.cpp -o your_file
+   ```
 
-## Troubleshooting
+3. **Encoding Issues**
+   - Ensure all input files are UTF-8 encoded
+   - Use `file -I filename` to check encoding
+   - Convert if needed: `iconv -f original_encoding -t UTF-8 input_file > output_file`
 
-If you encounter any issues:
-1. Check file permissions on the shell scripts
-2. Verify that all C++ files are compiled
-3. Ensure the Stanford Segmenter is properly installed
-4. Check input file encoding (should be UTF-8)
+4. **Stanford Segmenter Issues**
+   - Verify segmenter installation
+   - Check segmenter path in scripts
+   - Ensure Java is installed and configured
+
+## Best Practices
+
+1. **Before Running**:
+   - Backup your data
+   - Verify file permissions
+   - Check input file encoding
+   - Compile all C++ files
+   - Choose the appropriate input method based on your data format
+
+2. **During Processing**:
+   - Monitor disk space
+   - Check log files
+   - Verify output structure
+
+3. **After Processing**:
+   - Validate CSV files
+   - Check directory structure
+   - Verify Chinese character preservation
 
 ## Contributing
 
-Feel free to submit issues and enhancement requests! 
+Feel free to submit issues and enhancement requests! When contributing:
+1. Fork the repository
+2. Create a feature branch
+3. Submit a pull request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details. 
