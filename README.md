@@ -135,11 +135,32 @@ The pipelines support two methods of input. The required directories/files shoul
 ### Word Indexing Output
 ```
 Word_Indexing/
-├── word_1/
-│   └── indices.csv
-├── word_2/
-│   └── indices.csv
-└── ...
+├── utterance_arrays.json
+└── word_directories/
+    ├── word_1/
+    │   └── indices.csv
+    ├── word_2/
+    │   └── indices.csv
+    └── ...
+```
+
+The `utterance_arrays.json` file contains an array of utterances with their word indices:
+```json
+[
+  {
+    "utterance": [
+      {
+        "index": 0,
+        "word": "高"
+      },
+      {
+        "index": 1,
+        "word": "德"
+      }
+    ],
+    "utterance_id": "37_5622_20170913203118.wav"
+  }
+]
 ```
 
 ### Syllable Indexing Output
@@ -154,13 +175,9 @@ Syllable_Indexing/
 
 ## CSV File Format
 
-Each CSV file contains:
-- Utterance ID
-- Word/Syllable index
-
-Example:
+### Syllable Indexing CSV Format
+Each CSV file contains utterance IDs and indices with no header row:
 ```csv
-utterance_id,index
 20170001P00444A0063,1
 20170001P00444A0064,2
 ```
