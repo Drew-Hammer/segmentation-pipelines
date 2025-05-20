@@ -19,6 +19,10 @@ Anytime you want to run the code, simply put this into the terminal:
 ``` cd .devtools ```
 Then run the following to  run the full system: Docker server + client
 ``` make run ``` 
+To run solely the client run 
+``` make client ``` 
+To run solely the server run 
+``` make server ``` 
 
 ## Common errors: 
 if you get 
