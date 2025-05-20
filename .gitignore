@@ -1,0 +1,65 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+.env/
+.venv/
+env/
+venv/
+ENV/
+Pipfile.lock
+
+# PyInstaller
+*.spec
+
+# Distribution / packaging
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Logs and local data
+*.log
+*.db
+*.sqlite3
+*.pid
+*.bak
+*.swp
+
+# Flask config
+instance/
+*.env
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# VSCode / PyCharm
+.vscode/
+.idea/
+
+# macOS
+.DS_Store
+
+# Docker-related
+docker-compose.override.yml
+*.tar
+*.img
+*.bak
+Dockerfile
+.dockerignore
+
+# Custom ignores
+Client/Live_Transcription/config.ini
+dev/
